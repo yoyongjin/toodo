@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import TodoItem from "./TodoItem";
 
@@ -11,10 +12,23 @@ const ListContainer = styled.div`
 `;
 
 const TodoList = () => {
+  const todoList = useSelector((state) => state.todo);
+
+  console.log(todoList);
+
   return (
     <ListContainer>
-      <TodoItem todo="todo1" />
-      <TodoItem todo="todo2" />
+      {/* <TodoItem todo={todoList[0].whatTodo} />
+      <TodoItem todo={todoList[1].whatTodo} /> */}
+      {todoList.map((todo) => {
+        return (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            whatTodo={todo.whatTodo}
+          />
+        );
+      })}
     </ListContainer>
   );
 };
